@@ -1,0 +1,24 @@
+{
+	"manifest_version": 2,
+
+	"name": "Poloniex USD Prices",
+	"description": "Add prices in USD for exchanges solely between cryptocurrencies.",
+	"version": "1.0",
+
+	"icons": {
+		"128": "icon.png"
+	},
+	
+	"permissions": [
+		"activeTab"
+	],
+	
+	"content_scripts": [{
+		"matches": ["*://poloniex.com/exchange*"],
+		"js": ["loader.js"]
+	}],
+	
+	"web_accessible_resources": [
+		"main.js"
+	]
+}
