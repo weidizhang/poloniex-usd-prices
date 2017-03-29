@@ -3,44 +3,54 @@
  */
 
 var tradeFrom = "btc";
+var updateInProgress = false;
 
 $(document).ready(function() {	
-	disableIncompatibleFeatures();
-	
 	setInterval(function() {
 		updateCurrentCurrency();
-		updateUSDPrice();
+		
+		if (!updateInProgress) { // in case previous ticker fetch is still stuck
+			updateTickerPrice();
+		}
 	}, 2000);
 });
 
-function disableIncompatibleFeatures() {
-	$(".settings").remove();
-	$(".search").remove();
-}
-
-function updateCurrentCurrency() {
-	var codes = $(".code").text().split("/");
-	tradeFrom = codes[1].toLowerCase();
-}
-
-function updateUSDPrice() {
-	if (tradeFrom != "usdt") {
-		var fromPrice = parseFloat($("#marketRowusdt_" + tradeFrom + " .price").text());	
-	
-		var currentPrice = parseFloat($(".lastPrice .info").text());
-		var usdPrice = fromPrice * currentPrice;
+function updateTickerPrice() {	
+	if (tradeFrom != "USDT") {
+		updateInProgress = true;
 		
-		usdPrice = usdPrice.toFixed(8);
-		
-		if ($("#hilights .row").length < 3) {
-			$("#hilights").append("<div class=\"row\"><div></div></div>");			
-		}
-		
-		$("#hilights .row:last div").html("Last Price: <b>$" + usdPrice + "</b> USD");
+		$.getJSON("https://poloniex.com/public?command=returnTicker", function (data) {
+			var key = "USDT_" + tradeFrom;
+			var fromPrice = parseFloat(data[key]["last"]);
+			
+			updateUSDPrice(fromPrice);
+		}).fail(function(jqXHR, textStatus, errorThrown) {
+			updateInProgress = false;
+		});
 	}
 	else {
 		if ($("#hilights .row").length == 3) {
 			$("#hilights .row:last").remove();
 		}
 	}
+}
+
+function updateCurrentCurrency() {
+	var codes = $(".code").text().split("/");
+	tradeFrom = codes[1];
+}
+
+function updateUSDPrice(fromPrice) {
+	var currentPrice = parseFloat($(".lastPrice .info").text());
+	var usdPrice = fromPrice * currentPrice;
+	
+	usdPrice = usdPrice.toFixed(8);
+		
+	if ($("#hilights .row").length < 3) {
+		$("#hilights").append("<div class=\"row\"><div></div></div>");			
+	}
+		
+	$("#hilights .row:last div").html("Last Price: <b>$" + usdPrice + "</b> USD");
+	
+	updateInProgress = false;
 }
