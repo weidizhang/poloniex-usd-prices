@@ -14,7 +14,7 @@
 	],
 	
 	"content_scripts": [{
-		"matches": ["*://poloniex.com/exchange*"],
+		"matches": ["*://poloniex.com/exchange*", "*://poloniex.com/marginTrading*"],
 		"js": ["loader.js"]
 	}],
 	
