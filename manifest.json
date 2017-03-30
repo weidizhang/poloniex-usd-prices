@@ -3,7 +3,7 @@
 
 	"name": "Poloniex USD Prices",
 	"description": "Add prices in USD for exchanges solely between cryptocurrencies.",
-	"version": "1.0",
+	"version": "1.0.1",
 
 	"icons": {
 		"128": "icon.png"
