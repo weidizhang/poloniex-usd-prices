@@ -21,9 +21,15 @@ function updateTickerPrice() {
 		
 		$.getJSON("https://poloniex.com/public?command=returnTicker", function (data) {
 			var key = "USDT_" + tradeFrom;
-			var fromPrice = parseFloat(data[key]["last"]);
 			
-			updateUSDPrice(fromPrice);
+			if (key in data) {
+				var fromPrice = parseFloat(data[key]["last"]);
+				
+				updateUSDPrice(fromPrice);
+			}
+			else {
+				udpateInProgress = false;
+			}
 		}).fail(function(jqXHR, textStatus, errorThrown) {
 			updateInProgress = false;
 		});
