@@ -12,7 +12,7 @@ $(document).ready(function() {
 		if (!updateInProgress) { // in case previous ticker fetch is still stuck
 			updateTickerPrice();
 		}
-	}, 2000);
+	}, 4000);
 });
 
 function updateTickerPrice() {	
