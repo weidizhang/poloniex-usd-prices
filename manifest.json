@@ -14,11 +14,12 @@
 	],
 	
 	"content_scripts": [{
-		"matches": ["*://poloniex.com/exchange*", "*://poloniex.com/marginTrading*"],
+		"matches": ["*://poloniex.com/exchange*", "*://poloniex.com/marginTrading*", "*://poloniex.com/tradeHistory*"],
 		"js": ["loader.js"]
 	}],
 	
 	"web_accessible_resources": [
-		"main.js"
+		"exchangePage.js",
+		"historyPage.js"
 	]
 }
