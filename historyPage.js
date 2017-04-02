@@ -2,27 +2,17 @@ var tickerData = null;
 var btcUSDPrice = 0;
 
 $(document).ready(function() {
-	if (!onAnalysisPage()) {
-		updateTickerData();
-	}
+	updateTickerData();
 });
 
 $(window).bind("hashchange", function() {
-	// to-do: functionality/support for analyzation pages for specific coins
-	// for now: remove additional USD table heading
-	if (onAnalysisPage()) {
-		$("#total-usd").remove();
-	}
-	else {
-		$("#tradeHistoryTable th:last").before("<th id=\"total-usd\">Total (USD)</th>");
-		setTimeout(updateTotalUSD, 1000);
-	}
+	setTimeout(updateTotalUSD, 1000);
 });
 
 function updateTotalUSD() {
 	if ($("#loadingDiv").text() == "") {
-		$("#tradeHistoryTableBody tr").each(function(i, element) {
-			var totalElement = $($(element).children(".currency")[3]);
+		$("#tradeHistoryTable tbody tr").each(function(i, element) {
+			var totalElement = $($(element).children()[7]);
 			var totalPriceArgs = totalElement.text().split(" ");
 			
 			var totalPrice = parseFloat(totalPriceArgs[0]);
@@ -68,8 +58,10 @@ function updateTickerData() {
 }
 
 function updatePage() {
-	$("#tradeHistoryTable th:last").before("<th id=\"total-usd\">Total (USD)</th>");
-		
+	if ($("#total-usd").length == 0) {
+		$("#tradeHistoryTable th:last").before("<th id=\"total-usd\">Total (USD)</th>");
+	}
+	
 	setTimeout(updateTotalUSD, 1000);
 	
 	// changePage hook
