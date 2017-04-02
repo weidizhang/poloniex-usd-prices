@@ -4,8 +4,9 @@ Created by Weidi Zhang
 
 ## Description
 
-This chrome extension adds an additional box to display prices in USD for exchanges solely between cryptocurrencies on Poloniex, 
-such as between BTC and ETH.
+This chrome extension adds to Poloniex:
+* Additional box to display prices in USD for exchanges between cryptocurrencies 
+* Additional table column for prices in USD on trade history and analysis pages
 
 ## License
 

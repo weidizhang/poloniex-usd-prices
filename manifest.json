@@ -2,8 +2,8 @@
 	"manifest_version": 2,
 
 	"name": "Poloniex USD Prices",
-	"description": "Add prices in USD for exchanges solely between cryptocurrencies.",
-	"version": "1.0.1",
+	"description": "Add prices in USD for cryptocurrencies on Poloniex.",
+	"version": "1.1.0",
 
 	"icons": {
 		"128": "icon.png"
