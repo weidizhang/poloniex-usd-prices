@@ -28,7 +28,7 @@ function updateTickerPrice() {
 				updateUSDPrice(fromPrice);
 			}
 			else {
-				udpateInProgress = false;
+				updateInProgress = false;
 			}
 		}).fail(function(jqXHR, textStatus, errorThrown) {
 			updateInProgress = false;
