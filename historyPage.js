@@ -18,10 +18,15 @@ function updateTotalUSD() {
 			var totalPrice = parseFloat(totalPriceArgs[0]);
 			var totalCurrency = totalPriceArgs[1];
 			
-			var totalPriceUSD = totalPrice * btcUSDPrice;
-			if (totalCurrency != "BTC") {
-				var conversionRate = parseFloat(tickerData["BTC_" + totalCurrency]["last"]);
-				totalPriceUSD *= conversionRate;
+			if (totalCurrency == "USDT") {
+				totalPriceUSD = totalPrice;
+			}
+			else {
+				var totalPriceUSD = totalPrice * btcUSDPrice;
+				if (totalCurrency != "BTC") {
+					var conversionRate = parseFloat(tickerData["BTC_" + totalCurrency]["last"]);
+					totalPriceUSD *= conversionRate;
+				}
 			}
 			
 			totalPriceUSD = totalPriceUSD.toFixed(8);
